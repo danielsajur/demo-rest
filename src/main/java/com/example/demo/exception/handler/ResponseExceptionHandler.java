@@ -9,15 +9,19 @@ import com.example.demo.response.ResponseBuilder;
 import com.example.demo.response._Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ResponseExceptionHandler.class);
@@ -54,6 +58,16 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Response> runtimeException(RuntimeException e) {
 		_Error error = getError("" + e.hashCode(), e.getMessage());
 		return new ResponseBuilder().withError(error).withHttp(HttpStatus.BAD_REQUEST).build();
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		final ObjectError objectError = ex.getBindingResult().getAllErrors().get(0);
+		String errorMessage = objectError.getDefaultMessage();
+		final _Error error = getError("MANV" + errorMessage.hashCode(), errorMessage);
+		return new ResponseBuilder().withError(error).withHttp(HttpStatus.BAD_REQUEST).build();
+
 	}
 
 	private _Error getError(BusinessException e) {

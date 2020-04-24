@@ -48,7 +48,6 @@ public class PersonController {
 	}
 
 
-	@Validated
 	@PostMapping
 	public ResponseEntity<Response<PersonDTO>> add(@Valid @RequestBody PersonDTO request) {
 
