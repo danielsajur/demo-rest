@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.demo.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.model.entity.PersistentEntity;
@@ -12,7 +13,7 @@ import com.example.demo.service.AbstractService;
 
 import org.springframework.util.CollectionUtils;
 
-public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, DAO extends CrudRepository<E, ID>> implements AbstractService<ID, E> {
+public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, DAO extends JpaRepository<E, ID>> implements AbstractService<ID, E> {
 
 	@Autowired
 	private DAO dao;

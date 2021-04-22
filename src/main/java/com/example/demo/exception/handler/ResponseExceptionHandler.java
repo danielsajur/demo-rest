@@ -28,7 +28,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = NotFoundException.class)
 	public ResponseEntity<Response> notFoundException(NotFoundException e) {
-		return new ResponseBuilder().withError(getError(e)).withHttp(HttpStatus.NOT_FOUND).build();
+		return new ResponseBuilder().withError(getError(e)).withHttp(HttpStatus.NO_CONTENT).build();
 	}
 
 	@ExceptionHandler(value = HeaderException.class)
@@ -75,8 +75,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	private _Error getError(String code, String message) {
-		LOGGER.info("Responding not founded exception!");
-		LOGGER.info("Parsing exception to error to create a friendly response");
+		LOGGER.info("Parsing exception a friendly error response");
 		LOGGER.info(message);
 		return new _Error(code, message);
 	}

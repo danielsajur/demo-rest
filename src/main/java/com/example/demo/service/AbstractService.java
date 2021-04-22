@@ -15,5 +15,6 @@ public interface AbstractService<ID extends Number, E extends PersistentEntity> 
 	void deleteById(ID id);
 	
 	E save(E entity);
-	
+
+//	List<E> filter();
 }

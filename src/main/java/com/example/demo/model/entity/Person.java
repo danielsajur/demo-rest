@@ -14,7 +14,7 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name = "people")
-public class Person implements PersistentEntity {
+public class Person implements PersistentEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

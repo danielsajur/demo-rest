@@ -1,9 +1,9 @@
 package com.example.demo.model.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.example.demo.model.entity.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface PersonDAO extends CrudRepository<Person, Long>{
+public interface PersonDAO extends JpaSpecificationExecutor<Person>, JpaRepository<Person, Long> {
 
 }

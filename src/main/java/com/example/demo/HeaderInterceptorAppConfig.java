@@ -12,6 +12,6 @@ public class HeaderInterceptorAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestHandlerInterceptor());
+//        registry.addInterceptor(new RequestHandlerInterceptor());
     }
 }

@@ -29,13 +29,13 @@ public class RequestHandlerInterceptor extends HandlerInterceptorAdapter {
 
 		final String systemName = request.getHeader(SYSTEM_NAME);
 
-		if(StringUtils.isEmpty(systemName)){
-			throw new RequiredHeaderException(SYSTEM_NAME);
-		}
-
-		if(!systemName.equals("demo")){
-			throw new InvalidHeaderException(SYSTEM_NAME);
-		}
+//		if(StringUtils.isEmpty(systemName)){
+//			throw new RequiredHeaderException(SYSTEM_NAME);
+//		}
+//
+//		if(!systemName.equals("demo")){
+//			throw new InvalidHeaderException(SYSTEM_NAME);
+//		}
 
 		return super.preHandle(request, response, handler);
 	}
